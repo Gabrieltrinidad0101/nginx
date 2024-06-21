@@ -1,0 +1,14 @@
+services:
+  nginx:
+    image: nginx:1.23.3-alpine
+    build: .
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./conf.d:/etc/nginx/conf.d
+      
+networks:
+  default:
+    name: development
+    external: true
