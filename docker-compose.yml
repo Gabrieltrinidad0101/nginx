@@ -15,6 +15,13 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
+  
+  db:
+    image: mysql:8.0.37
+    container_name: mysql
+    restart: always
+    env_file: .env
+
 networks:
   default:
     name: development
