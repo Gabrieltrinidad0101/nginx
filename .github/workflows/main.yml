@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   build-and-deploy:
-    runs-on: runs-on: [self-hosted, linux, x64, runner]
+    runs-on: [self-hosted, linux, x64, runner]
     steps:
       - name: Deploy
         run: ls
