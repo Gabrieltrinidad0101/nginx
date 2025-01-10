@@ -21,6 +21,11 @@ services:
     container_name: mysql
     restart: always
     env_file: .env
+  
+  mongo_pro:
+    image: mongo:5.0.14
+    container_name: mongo
+    restart: always
 
 networks:
   default:
