@@ -11,6 +11,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+      
+      - name: Check if secret exists
+        run: |
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "Secret MY_SECRET is not set."
+          else
+            echo "Secret MY_SECRET is set."
+          fi
 
       - name: print out example job
         uses: appleboy/ssh-action@v0.1.10
