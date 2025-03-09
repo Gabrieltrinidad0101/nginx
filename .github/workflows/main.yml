@@ -45,7 +45,5 @@ jobs:
         continue-on-error: true
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S snap install docker
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S usermod -aG docker $USER
-      
       - name: Run Containers
-        run: docker ps
+        run: echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker ps && ls
