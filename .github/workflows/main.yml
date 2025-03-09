@@ -41,6 +41,9 @@ jobs:
   install-docker:
     runs-on: self-hosted
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
       - name: Install Docker
         continue-on-error: true
         run: |
