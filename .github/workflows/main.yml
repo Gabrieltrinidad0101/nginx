@@ -40,20 +40,8 @@ jobs:
           '
   install-docker:
     runs-on: self-hosted
-    steps:
-      - name: Check if Docker is Installed
-        id: check-docker
-        run: |
-          if sshpass -p ${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'command -v docker &> /dev/null'; then
-            echo "Docker is installed."
-            echo "docker_installed=true" >> $GITHUB_OUTPUT
-          else
-            echo "Docker is not installed."
-            echo "docker_installed=false" >> $GITHUB_OUTPUT
-          fi
-      
-      - name: Install Docker (if not installed)
-        if: steps.check-docker.outputs.docker_installed == 'false'
+      - name: Install Docker
+        continue-on-error: true
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S snap install docker
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S usermod -aG docker $USER
