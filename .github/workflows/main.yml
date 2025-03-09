@@ -17,4 +17,12 @@ jobs:
 
       - name: Connect to Remote Server
         run: |
-          sshpass -p ${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'ls'
+          sshpass -p ${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} '
+          mkdir ${{ secrets.RUNNER_PATH }} && cd ${{ secrets.RUNNER_PATH }}
+          curl -o actions-runner-linux-x64-2.322.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.322.0/actions-runner-linux-x64-2.322.0.tar.gz
+          echo "${{ secrets.RUNNER_ACCOUNT_TOKEN }}  actions-runner-linux-x64-2.322.0.tar.gz" | shasum -a 256 -c
+          tar xzf ./actions-runner-linux-x64-2.322.0.tar.gz
+          echo -e "\n\n\n\n" | ./config.sh --url https://github.com/Gabrieltrinidad0101 --token ${{ secrets.RUNNER_TOKEN }}
+          sudo ./svc.sh install
+          sudo ./svc.sh start
+          '
