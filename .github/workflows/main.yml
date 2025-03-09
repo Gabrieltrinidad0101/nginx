@@ -55,9 +55,9 @@ jobs:
       - name: Install Docker (if not installed)
         if: steps.check-docker.outputs.docker_installed == 'false'
         run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rf /var/lib/docker
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rf /var/lib/containerd
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras || true
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rf /var/lib/docker || true
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rf /var/lib/containerd || true
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S apt-get update
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S apt-get install ca-certificates curl
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S install -m 0755 -d /etc/apt/keyrings
