@@ -48,6 +48,12 @@ jobs:
         continue-on-error: true
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S snap install docker
+      
+      - name: Create Network
+        continue-on-error: true
+        run: |
+          docker network create docker-network
 
       - name: Run Containers
-        run: docker compose up -d
+        run: |
+          docker compose up -d
