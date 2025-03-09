@@ -23,6 +23,6 @@ jobs:
           echo "${{ secrets.RUNNER_ACCOUNT_TOKEN }}  actions-runner-linux-x64-2.322.0.tar.gz" | shasum -a 256 -c
           tar xzf ./actions-runner-linux-x64-2.322.0.tar.gz
           echo -e "\n\n\n\n" | ./config.sh --url https://github.com/Gabrieltrinidad0101 --token ${{ secrets.RUNNER_TOKEN }}
-          sudo ./svc.sh install
-          sudo ./svc.sh start
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S ./svc.sh install
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S ./svc.sh start
           '
