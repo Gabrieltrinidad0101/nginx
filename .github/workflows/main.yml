@@ -5,9 +5,16 @@ on:
     branches:
       - master
 jobs:
-  build-and-deploy:
-    runs-on: self-hosted
+  deploy:
+    runs-on: ubuntu-latest
+  install-runner:
     steps:
-      - uses: actions/checkout@v3
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H server_ip >> ~/.ssh/known_hosts
+
       - name: Deploy
-        run: ls
+        run: ssh {{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'ls'
