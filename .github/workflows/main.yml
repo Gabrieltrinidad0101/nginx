@@ -54,6 +54,5 @@ jobs:
         if: steps.check-docker.outputs.docker_installed == 'false'
         run: echo "NOT"
       
-      - name: Install Docker (if not installed)
-        if: steps.check-docker.outputs.docker_installed == 'false'
-        run: echo "YES"
+      - name: Run Containers
+        run: docker ps
