@@ -16,9 +16,5 @@ jobs:
         run: sudo apt-get install -y sshpass
 
       - name: Connect to Remote Server
-        env:
-          REMOTE_SERVER_IP: ${{ secrets.SERVER_IP }}
-          REMOTE_SERVER_USERNAME: ${{ secrets.USER_NAME }}
-          REMOTE_SERVER_PASSWORD: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          sshpass -p "$REMOTE_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $REMOTE_SERVER_USERNAME@$REMOTE_SERVER_IP 'echo "Connected to remote server!"'
+          sshpass -p ${{ secrets.SSH_PRIVATE_KEY }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'ls'
