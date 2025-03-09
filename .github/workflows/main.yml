@@ -23,4 +23,4 @@ jobs:
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Deploy
-        run: ssh ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'ls'
+        run: ssh -v ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'ls'
