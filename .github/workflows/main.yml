@@ -12,16 +12,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - name: print out example job
+        uses: appleboy/ssh-action@v0.1.10
         with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.USER_NAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.SERVER_IP }}
-
-
-      - name: Debug SSH Connection
-        run: |
-          ssh -v -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'echo "Connected successfully"'
-
-      - name: Deploy
-        run: ssh -v -o StrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.SERVER_IP }} 'ls'
+          port: 22
+          command_timeout: 30m
+          script: | 
+            echo "Nice Job!!!"
