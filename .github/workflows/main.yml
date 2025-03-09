@@ -38,7 +38,9 @@ jobs:
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S ./svc.sh install
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S ./svc.sh start
           '
-      
+  install-docker:
+    runs-on: self-hosted
+    steps:
       - name: Check if Docker is Installed
         id: check-docker
         run: |
