@@ -12,21 +12,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       
-      - name: Check if secret exists
-        run: |
-          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
-            echo "Secret MY_SECRET is not set."
-          else
-            echo "Secret MY_SECRET is set."
-          fi
+      - name: Install SSHpass
+        run: sudo apt-get install -y sshpass
 
-      - name: print out example job
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.USER_NAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          command_timeout: 30m
-          script: | 
-            echo "Nice Job!!!"
+      - name: Connect to Remote Server
+        env:
+          REMOTE_SERVER_IP: ${{ secrets.SERVER_IP }}
+          REMOTE_SERVER_USERNAME: ${{ secrets.USER_NAME }}
+          REMOTE_SERVER_PASSWORD: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          sshpass -p "$REMOTE_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $REMOTE_SERVER_USERNAME@$REMOTE_SERVER_IP 'echo "Connected to remote server!"'
