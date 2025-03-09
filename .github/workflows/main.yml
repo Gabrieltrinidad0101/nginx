@@ -48,5 +48,6 @@ jobs:
         continue-on-error: true
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S snap install docker
+
       - name: Run Containers
-        run: echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker ps && ls
+        run: docker compose up -d
