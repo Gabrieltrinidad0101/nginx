@@ -64,6 +64,10 @@ jobs:
           echo "MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD" >> .env
         env:
           MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+      
+      - name: nginx set up domain
+        run: |
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up -d --build nginx_set_up
 
       - name: Run Containers
         run: |
