@@ -62,8 +62,10 @@ jobs:
       - name: env file
         run: |
           echo "MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD" >> .env
+          echo "CERTBOT_DOMAIN=$CERTBOT_DOMAIN" >> .env
         env:
           MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+          CERTBOT_DOMAIN: ${{secrets.CERTBOT_DOMAIN}}
       
       - name: nginx set up domain
         run: |

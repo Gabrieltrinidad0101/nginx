@@ -6,6 +6,7 @@ services:
       - ./setup:/etc/nginx/conf.d
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
+
   nginx:
     image: nginx:1.23.3-alpine
     container_name: nginx
@@ -22,6 +23,13 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
+    command: >
+      certonly --webroot -w /var/www/certbot
+      --force-renewal
+      -d ${CERTBOT_DOMAIN}
+      --agree-tos
+    env_file:
+      - .env
   
   mysql:
     image: mysql:8.0.37
