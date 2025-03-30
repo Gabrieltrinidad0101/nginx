@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: rm nginx folder
         run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rf  /home/administrator/actions-runner/_work/nginx
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rf  /home/administrator/actions-runner/_work/nginx/nginx/certbot
 
       - name: Checkout Repository
         uses: actions/checkout@v3
