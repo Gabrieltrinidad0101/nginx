@@ -40,7 +40,7 @@ jobs:
           '
       - name: rm nginx folder
         run: |
-          echo ${{ secrets.RUNNER_PATH }} > /home/administrator/actions-runner/_work/test.txt
+          echo ${{ secrets.RUNNER_PATH }} >> /home/administrator/actions-runner/_work/test.txt
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rd  ${{ secrets.RUNNER_PATH }}/_work/nginx
 
   install-docker:
