@@ -69,7 +69,7 @@ jobs:
       
       - name: nginx set up domain
         run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up -d --build nginx_set_up
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up -d --build nginx_set_up --build
 
       - name: Run Containers
         run: |
