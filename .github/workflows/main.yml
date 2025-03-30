@@ -52,7 +52,7 @@ jobs:
       - name: Create Network
         continue-on-error: true
         run: |
-          docker network create docker-network
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker network create docker-network
 
       - name: Run Containers
         run: |
