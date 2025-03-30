@@ -74,8 +74,3 @@ jobs:
       - name: Run Containers
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up -d --build
-      
-      - name: remove nginx set up
-        run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker stop nginx_set_up
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker rm nginx_set_up
