@@ -53,6 +53,12 @@ jobs:
         continue-on-error: true
         run: |
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker network create docker-network
+      
+      - name: env file
+        run: |
+          echo "MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD" >> .env
+        env:
+          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
 
       - name: Run Containers
         run: |

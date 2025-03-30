@@ -20,6 +20,8 @@ services:
     image: mysql:8.0.37
     container_name: mysql
     restart: always
+    env_file:
+      - .env
   
   mongo:
     image: mongo:5.0.14
