@@ -3,7 +3,7 @@ services:
     image: nginx:1.23.3-alpine
     container_name: nginx
     ports:
-      - 9901:9901
+      - 80:80
       - 443:443
 
   certbot:
