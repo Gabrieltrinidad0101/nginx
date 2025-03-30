@@ -77,4 +77,5 @@ jobs:
       
       - name: remove nginx set up
         run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker stop nginx_set_up && docker rm nginx_set_up
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker stop nginx_set_up
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker rm nginx_set_up
