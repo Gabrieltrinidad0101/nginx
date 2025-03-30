@@ -34,6 +34,9 @@ services:
       --agree-tos
     env_file:
       - .env
+    depends_on:
+      - nginx
+      - nginx_set_up
   
   mysql:
     image: mysql:8.0.37
