@@ -9,6 +9,9 @@ jobs:
   install-runner:
     runs-on: ubuntu-latest
     steps:
+      - name: rm nginx folder
+        run: |
+          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rd  /home/administrator/actions-runner/_work/nginx
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -38,9 +41,6 @@ jobs:
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S ./svc.sh install
           echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S ./svc.sh start
           '
-      - name: rm nginx folder
-        run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S rm -rd  ${{ secrets.RUNNER_PATH }}/_work/nginx
 
   install-docker:
     runs-on: self-hosted
