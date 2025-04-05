@@ -1,36 +1,16 @@
 services:
-  nginx_set_up:
-    image: nginx:1.23.3-alpine
-    container_name: nginx_set_up
-    volumes:
-      - ./setup:/etc/nginx/conf.d
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
-    ports:
-      - 80:80  
   nginx:
-    image: nginx:1.23.3-alpine
-    container_name: nginx
+    restart: unless-stopped
+    image: staticfloat/nginx-certbot
     ports:
-      - 443:443
+        - 80:80/tcp
+        - 443:443/tcp
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
-    depends_on:
-      - nginx_set_up
+      - ./conf.d:/etc/nginx/user.conf.d:ro
+      - letsencrypt:/etc/letsencrypt
+    environment:
+        CERTBOT_EMAIL: ${CERTBOT_DOMAIN}
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    entrypoint: "/bin/sh -c 'trap exit TERM; certbot certonly --non-interactive --agree-tos --webroot -w /var/www/certbot -d ${CERTBOT_DOMAIN} && while :; do certbot renew --non-interactive; sleep 12h & wait $${!}; done;'"
-    env_file:
-      - .env
-    depends_on:
-      - nginx_set_up
-  
   mysql:
     image: mysql:8.0.37
     container_name: mysql

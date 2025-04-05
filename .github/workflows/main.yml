@@ -67,20 +67,20 @@ jobs:
           MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
           CERTBOT_DOMAIN: ${{secrets.CERTBOT_DOMAIN}}
       
-      - name: Run Containers
-        run: |
-          echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up nginx_set_up -d --build
+      # - name: Run Containers
+      #   run: |
+      #     echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up nginx_set_up -d --build
       
-      - name: Waiting for nginx-set-up to be ready
-        run: |
-          sleep 3
+      # - name: Waiting for nginx-set-up to be ready
+      #   run: |
+      #     sleep 3
 
-      - name: Stop nginx-certbot-1 if it exists
-        run: |
-          if ! echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker ps -a --format '{{.Names}}' | grep -w "nginx-certbot-1" > /dev/null; then
-            echo "RUNNING    nginx-certbot-1"
-            echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up certbot -d --build
-          fi
+      # - name: Stop nginx-certbot-1 if it exists
+      #   run: |
+      #     if ! echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker ps -a --format '{{.Names}}' | grep -w "nginx-certbot-1" > /dev/null; then
+      #       echo "RUNNING    nginx-certbot-1"
+      #       echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up certbot -d --build
+      #     fi
       
       - name: Run Containers
         run: |
