@@ -7,7 +7,7 @@ services:
         - 443:443/tcp
     volumes:
       - ./conf.d:/etc/nginx/user.conf.d:ro
-      - letsencrypt:/etc/letsencrypt
+      - ./letsencrypt:/etc/letsencrypt
     environment:
         CERTBOT_EMAIL: ${CERTBOT_DOMAIN}
 
