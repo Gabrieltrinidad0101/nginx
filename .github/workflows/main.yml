@@ -81,6 +81,8 @@ jobs:
             echo "RUNNING    nginx-certbot-1"
             echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up certbot -d --build
           fi
+        env:
+          CERTBOT_DOMAIN: ${{secrets.CERTBOT_DOMAIN}}
       
       - name: Run Containers
         run: |
