@@ -9,7 +9,9 @@ services:
       - ./conf.d:/etc/nginx/user.conf.d:ro
       - ./letsencrypt:/etc/letsencrypt
     environment:
-        CERTBOT_EMAIL: ${CERTBOT_DOMAIN}
+        CERTBOT_EMAIL: gabrielqwes123@gmail.com
+        ENVSUBST_VARS: FQDN
+        FQDN: ${CERTBOT_DOMAIN}
 
   mysql:
     image: mysql:8.0.37
