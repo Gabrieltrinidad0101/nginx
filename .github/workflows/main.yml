@@ -69,7 +69,7 @@ jobs:
 
       - name: Stop nginx-certbot-1 if it exists
         run: |
-          if docker ps -a --format '{{.Names}}' | grep -w "nginx-certbot-1" > /dev/null; then
+          if echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker ps -a --format '{{.Names}}' | grep -w "nginx-certbot-1" > /dev/null; then
             echo "RUNNING    nginx-certbot-1"
             echo ${{secrets.SSH_PRIVATE_KEY}} | sudo -S docker compose up certbot -d --build
           fi
