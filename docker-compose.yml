@@ -7,7 +7,7 @@ services:
         - 443:443/tcp
     volumes:
       - ./conf.d:/etc/nginx/user.conf.d:ro
-      - ./letsencrypt:/etc/letsencrypt
+      - letsencrypt:/etc/letsencrypt
     environment:
         CERTBOT_EMAIL: gabrielqwes123@gmail.com
         ENVSUBST_VARS: FQDN
@@ -29,3 +29,6 @@ networks:
   default:
     name: docker-network
     external: true
+
+volumes:
+    letsencrypt:
