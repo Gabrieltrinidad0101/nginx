@@ -34,7 +34,6 @@ services:
     env_file:
       - .env
     depends_on:
-      - nginx
       - nginx_set_up
   
   mysql:
