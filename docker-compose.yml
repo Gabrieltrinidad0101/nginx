@@ -25,6 +25,9 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
+    entrypoint: "/bin/sh -c 'trap exit TERM; certbot certonly --webroot -w /usr/share/nginx/html -d ${CERTBOT_DOMAIN} && while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    env_file:
+      - .env
     depends_on:
       - nginx_set_up
   
